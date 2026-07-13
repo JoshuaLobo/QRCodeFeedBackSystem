@@ -90,16 +90,39 @@ feedbackContainer.addEventListener("click", async (e) => {
 
     if (reviewButton) {
 
-        await toggleStatus(item);
+       console.log("Review button clicked");
+        console.log(item);
+
+        try {
+
+            await toggleStatus(item);
+
+            console.log("Status updated successfully");
+    
+        } catch (err) {
+
+            console.error(err);
+         }
 
     }
 
-    if (deleteButton) {
+   if (deleteButton) {
+
+    console.log("Delete button clicked");
+
+    try {
 
         await deleteFeedback(item);
 
+        console.log("Delete successful");
+
+    } catch (err) {
+
+        console.error(err);
+
     }
 
+}
     draw(
 
         searchFeedback(
