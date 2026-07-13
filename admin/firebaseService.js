@@ -39,15 +39,21 @@ export async function loadFeedback() {
 
     snapshot.forEach(document => {
 
-        feedback.push({
+    const data = document.data();
 
-            id: document.id,
+    // Skip deleted feedback
+    if (data.deleted === true)
+        return;
 
-            ...document.data()
+    feedback.push({
 
-        });
+        id: document.id,
+
+        ...data
 
     });
+
+});
 
     return feedback;
 
