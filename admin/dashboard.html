@@ -3,66 +3,34 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Dashboard</title>
 
-<title>Feedback Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
 
-<link rel="stylesheet" href="dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 </head>
-<header class="dashboardHeader">
 
-    <div class="headerSpacer"></div>
-
-    <div class="headerTitle">
-
-        <img src="../assets/logo.png" class="logo">
-
-        <h1>Skinner's Horse</h1>
-
-        <h2>Feedback Dashboard</h2>
-
-    </div>
-
-    <div class="adminActions">
-
-        <button id="logoutBtn">
-            Sign Out
-        </button>
-
-        <button id="exportBtn">
-            📄 Export Feedback
-        </button>
-
-    </div>
-
-</header>
 <body>
-<div class="toolbar">
 
-    <input
-        type="text"
-        id="search"
-        placeholder="Search Feedback">
-
-    
-
-</div>
 <div class="dashboard">
 
-    <div class="header">
+    <!-- ================= HEADER ================= -->
 
-        <img src="../assets/logo.png" class="logo">
+    <header class="header">
 
-        <div>
+        <div></div>
+
+        <div class="titleArea">
+
+            <img src="../assets/logo.png" class="logo">
 
             <h1>Skinner's Horse</h1>
 
@@ -70,55 +38,81 @@
 
         </div>
 
-    </div>
-    <div class="adminActions">
-
-            <button id="logoutBtn">
-                Sign Out
-            </button>
+        <div class="adminButtons">
 
             <button id="exportBtn">
-                📄 Export CSV
+
+                📄 Export Feedback
+
             </button>
-    </div>
-    
-    <div class="stats">
 
-    <div class="card">
-        <h3>Total Feedback</h3>
-        <p id="totalCount">0</p>
-    </div>
+            <button id="logoutBtn">
 
-    <div class="card">
-        <h3>Read</h3>
-        <p id="readCount">0</p>
-    </div>
+                Sign Out
 
-    <div class="card">
-        <h3>Unread</h3>
-        <p id="unreadCount">0</p>
-    </div>
+            </button>
 
-    <div class="card">
-        <h3>Anonymous</h3>
-        <p id="anonymousCount">0</p>
-    </div>
+        </div>
 
-</div>
+    </header>
 
-    <input
+    <!-- ================= STATS ================= -->
 
-        id="search"
+    <section class="statsGrid">
 
-        type="text"
+        <div class="statCard">
 
-        placeholder="Search feedback..."
+            <h3>Total Feedback</h3>
 
-    >
+            <span id="totalCount">0</span>
 
-    <div id="feedbackContainer">
+        </div>
 
-    </div>
+        <div class="statCard">
+
+            <h3>Read</h3>
+
+            <span id="readCount">0</span>
+
+        </div>
+
+        <div class="statCard">
+
+            <h3>Unread</h3>
+
+            <span id="unreadCount">0</span>
+
+        </div>
+
+        <div class="statCard">
+
+            <h3>Anonymous</h3>
+
+            <span id="anonymousCount">0</span>
+
+        </div>
+
+    </section>
+
+    <!-- ================= SEARCH ================= -->
+
+    <section class="toolbar">
+
+        <input
+
+            type="text"
+
+            id="search"
+
+            placeholder="Search by name or feedback...">
+
+    </section>
+
+    <!-- ================= FEEDBACK ================= -->
+
+    <section id="feedbackContainer">
+
+    </section>
 
 </div>
 
