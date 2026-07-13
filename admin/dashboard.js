@@ -17,9 +17,7 @@ const searchBox = document.getElementById("search");
 const feedbackContainer = document.getElementById("feedbackContainer");
 const exportBtn=document.getElementById("exportBtn");
 
-const today = new Date().toISOString().split("T")[0];
 
-a.download = `Feedback_${today}.csv`;
 
 let feedback = [];
 
