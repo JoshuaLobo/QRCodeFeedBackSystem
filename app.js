@@ -2,7 +2,7 @@
 // Skinner's Horse Feedback System
 // app.js
 // =====================================
-
+console.log("app.js loaded");
 import { db } from "./firebase.js";
 
 import {
