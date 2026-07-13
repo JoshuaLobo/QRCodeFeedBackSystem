@@ -3,168 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skinners Horse - Feedback</title>
-    <style>
-        /* Base Page Styling */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #050505; /* Deep black to match the logo background */
-            color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+    <title>Skinner's Horse | Feedback</title>
 
-        /* Container for the form */
-        .feedback-container {
-            background-color: #151515;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            border: 1px solid #333;
-        }
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 
-        /* Logo Styling */
-        .logo {
-            max-width: 180px;
-            height: auto;
-            margin-bottom: 15px;
-        }
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        /* Typography */
-        h1 {
-            margin: 0;
-            font-size: 28px;
-            color: #dfb15b; /* Gold tone matching the logo */
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        
-        h2 {
-            margin: 5px 0 25px 0;
-            font-size: 16px;
-            color: #888;
-            font-weight: normal;
-            letter-spacing: 2px;
-        }
-
-        /* Form Elements */
-        form {
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-        }
-
-        label {
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #ccc;
-        }
-
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            background-color: #222;
-            border: 1px solid #444;
-            border-radius: 6px;
-            color: #fff;
-            font-family: inherit;
-            box-sizing: border-box;
-            transition: border-color 0.3s ease;
-        }
-
-        input[type="text"]:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #dfb15b;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        /* Submit Button */
-        button {
-            background-color: #2b397c; /* Blue tone matching the ribbon */
-            color: #fff;
-            padding: 14px;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            letter-spacing: 1px;
-        }
-
-        button:hover {
-            background-color: #1d2654;
-        }
-
-        /* Character Counter Note */
-        .char-limit {
-            font-size: 12px;
-            color: #666;
-            text-align: right;
-            margin-top: -15px;
-            margin-bottom: 20px;
-            display: block;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyA9UdyCf9NLHq2FOrHlt6E6ahzUGnffX1Y",
-    authDomain: "skinnershorsefeedback.firebaseapp.com",
-    projectId: "skinnershorsefeedback",
-    storageBucket: "skinnershorsefeedback.firebasestorage.app",
-    messagingSenderId: "700597867047",
-    appId: "1:700597867047:web:9efa822056a1a98ff1b402"
-  };
+<div class="page">
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-</script>
-    <div class="feedback-container">
-        <!-- Logo Reference -->
-        <img src="71528_980638dee772796ad7dd547e5b606774.png" alt="Skinners Horse Logo" class="logo">
-        
-        <!-- Titles -->
-        <h1>Skinners Horse</h1>
+    <div class="feedback-card">
+
+        <!-- Logo -->
+
+        <img
+            src="assets/logo.png"
+            class="logo"
+            alt="Skinner's Horse Logo"
+        >
+
+        <!-- Title -->
+
+        <h1>Skinner's Horse</h1>
+
         <h2>Since 1803</h2>
-        
-        <!-- Feedback Form -->
-        <form action="#" method="POST" onsubmit="alert('Thank you for your feedback!'); return false;">
-            
-            <!-- Optional Name Field -->
-            <label for="userName">Naam(Optional)</label>
-            <input type="text" id="userName" name="userName" placeholder="Enter your name">
-            
-            <!-- Required Feedback Field (1000 Char Limit) -->
-            <label for="userFeedback">Aap ka Feedback</label>
-            <textarea id="userFeedback" name="userFeedback" placeholder="Please share your thoughts here..." maxlength="1000" required></textarea>
-            <span class="char-limit">Maximum 1000 characters</span>
-            
-            <!-- Submit Button -->
-            <button type="submit">Submit Feedback</button>
+
+        <p class="subtitle">
+
+            Your feedback helps us improve every event.
+
+        </p>
+
+        <!-- Form -->
+
+        <form id="feedbackForm">
+
+            <div class="input-group">
+
+                <label for="userName">
+
+                    Name (Optional)
+
+                </label>
+
+                <input
+                    type="text"
+                    id="userName"
+                    maxlength="50"
+                    placeholder="Enter your name"
+                >
+
+            </div>
+
+            <div class="input-group">
+
+                <label for="userFeedback">
+
+                    Your Feedback <span class="required">*</span>
+
+                </label>
+
+                <textarea
+
+                    id="userFeedback"
+
+                    maxlength="1000"
+
+                    required
+
+                    placeholder="Please share your thoughts..."
+
+                ></textarea>
+
+                <div class="counter">
+
+                    <span id="charCount">0</span>/1000
+
+                </div>
+
+            </div>
+
+            <button
+
+                id="submitBtn"
+
+                type="submit"
+
+            >
+
+                Submit Feedback
+
+            </button>
+
         </form>
+
+        <!-- Success Message -->
+
+        <div
+
+            id="successMessage"
+
+            class="success hidden"
+
+        >
+
+            ✓ Feedback submitted successfully.
+
+            <br>
+
+            Thank you for your valuable feedback.
+
+        </div>
+
     </div>
+
+</div>
+
+<!-- Firebase -->
+
+<script type="module" src="firebase.js"></script>
+
+<!-- App -->
+
+<script type="module" src="app.js"></script>
 
 </body>
 </html>
