@@ -1,5 +1,4 @@
 // =====================================
-// Skinner's Horse Feedback System
 // firebase.js
 // =====================================
 
@@ -9,9 +8,9 @@ import {
     getFirestore
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-// ============================
-// Firebase Configuration
-// ============================
+import {
+    getAuth
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
 const firebaseConfig = {
 
@@ -29,20 +28,10 @@ const firebaseConfig = {
 
 };
 
-// ============================
-// Initialize Firebase
-// ============================
-
 const app = initializeApp(firebaseConfig);
-
-// ============================
-// Initialize Firestore
-// ============================
 
 const db = getFirestore(app);
 
-// ============================
-// Export Firestore
-// ============================
+const auth = getAuth(app);
 
-export { db };
+export { db, auth };
