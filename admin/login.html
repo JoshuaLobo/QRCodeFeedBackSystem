@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Skinner's Horse | Admin Login</title>
+
+    <link rel="stylesheet" href="admin.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="login-card">
+
+    <img src="../assets/logo.png" class="logo">
+
+    <h1>Skinner's Horse</h1>
+
+    <h2>Administration Portal</h2>
+
+    <form id="loginForm">
+
+        <label>Email</label>
+
+        <input
+            type="email"
+            id="email"
+            required
+            placeholder="Enter Email">
+
+        <label>Password</label>
+
+        <input
+            type="password"
+            id="password"
+            required
+            placeholder="Enter Password">
+
+        <button type="submit">
+
+            Login
+
+        </button>
+
+    </form>
+
+    <p id="errorMessage"></p>
+
+</div>
+
+<script type="module" src="auth.js"></script>
+
+</body>
+
+</html>
