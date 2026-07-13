@@ -1,0 +1,337 @@
+/* ===========================
+   Skinner's Horse Feedback
+   style.css
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    background:#050505;
+
+    color:#F5F5F5;
+
+    font-family:'Inter',sans-serif;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px 20px;
+
+}
+
+/* Background glow */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+        radial-gradient(circle at top,#2f2b1a 0%,transparent 45%),
+        radial-gradient(circle at bottom,#0f1d45 0%,transparent 40%);
+
+    opacity:.45;
+
+    z-index:-1;
+
+}
+
+/* Card */
+
+.feedback-card{
+
+    width:100%;
+
+    max-width:560px;
+
+    background:#141414;
+
+    border:1px solid #3f3f3f;
+
+    border-radius:18px;
+
+    padding:45px;
+
+    box-shadow:
+    0 25px 70px rgba(0,0,0,.55);
+
+    transition:.35s;
+
+}
+
+.feedback-card:hover{
+
+    transform:translateY(-3px);
+
+}
+
+/* Logo */
+
+.logo{
+
+    width:170px;
+
+    display:block;
+
+    margin:0 auto 20px;
+
+}
+
+/* Heading */
+
+h1{
+
+    text-align:center;
+
+    font-family:'Cinzel',serif;
+
+    color:#dcb45b;
+
+    font-size:2.2rem;
+
+    letter-spacing:2px;
+
+}
+
+h2{
+
+    text-align:center;
+
+    margin-top:8px;
+
+    margin-bottom:25px;
+
+    color:#9b9b9b;
+
+    font-weight:400;
+
+    letter-spacing:3px;
+
+}
+
+.subtitle{
+
+    text-align:center;
+
+    color:#c8c8c8;
+
+    margin-bottom:35px;
+
+    line-height:1.6;
+
+}
+
+/* Labels */
+
+label{
+
+    display:block;
+
+    margin-bottom:10px;
+
+    font-weight:500;
+
+}
+
+.required{
+
+    color:#ff6464;
+
+}
+
+/* Inputs */
+
+input,
+
+textarea{
+
+    width:100%;
+
+    background:#1f1f1f;
+
+    border:1px solid #444;
+
+    color:white;
+
+    border-radius:10px;
+
+    padding:14px;
+
+    font-size:15px;
+
+    transition:.25s;
+
+}
+
+textarea{
+
+    min-height:170px;
+
+    resize:vertical;
+
+}
+
+input:focus,
+
+textarea:focus{
+
+    outline:none;
+
+    border-color:#dcb45b;
+
+    box-shadow:
+
+    0 0 15px rgba(220,180,91,.25);
+
+}
+
+/* Input spacing */
+
+.input-group{
+
+    margin-bottom:28px;
+
+}
+
+/* Counter */
+
+.counter{
+
+    margin-top:8px;
+
+    text-align:right;
+
+    color:#888;
+
+    font-size:13px;
+
+}
+
+/* Button */
+
+button{
+
+    width:100%;
+
+    padding:16px;
+
+    background:#27468f;
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+button:hover{
+
+    background:#365db8;
+
+    transform:translateY(-2px);
+
+}
+
+button:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+}
+
+/* Success box */
+
+.success{
+
+    margin-top:30px;
+
+    padding:18px;
+
+    border-radius:10px;
+
+    background:#103d1d;
+
+    border:1px solid #2ea54f;
+
+    color:#c5ffd4;
+
+    text-align:center;
+
+    line-height:1.7;
+
+    animation:fade .5s;
+
+}
+
+.hidden{
+
+    display:none;
+
+}
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(12px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* Mobile */
+
+@media(max-width:600px){
+
+.feedback-card{
+
+padding:28px;
+
+}
+
+.logo{
+
+width:130px;
+
+}
+
+h1{
+
+font-size:1.8rem;
+
+}
+
+}
