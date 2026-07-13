@@ -1,143 +1,206 @@
 import { auth, db } from "../firebase.js";
 
 import {
-
-onAuthStateChanged,
-
-signOut
-
-}
-
-from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
 import {
+    collection,
+    getDocs,
+    orderBy,
+    query,
+    doc,
+    updateDoc
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-collection,
+const container = document.getElementById("feedbackContainer");
+const total = document.getElementById("totalCount");
+const anonymous = document.getElementById("anonymousCount");
+const search = document.getElementById("search");
+const logout = document.getElementById("logoutBtn");
 
-getDocs,
+let feedback = [];
 
-orderBy,
+onAuthStateChanged(auth, async (user) => {
 
-query
+    if (!user) {
+        window.location = "login.html";
+        return;
+    }
+
+    await loadFeedback();
+
+});
+
+async function loadFeedback() {
+
+    const q = query(
+        collection(db, "feedback"),
+        orderBy("timestamp", "desc")
+    );
+
+    const snapshot = await getDocs(q);
+
+    feedback = [];
+
+    snapshot.forEach(docSnap => {
+
+        feedback.push({
+            id: docSnap.id,
+            ...docSnap.data()
+        });
+
+    });
+
+    render(feedback);
 
 }
 
-from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+function render(list) {
 
-const container=document.getElementById("feedbackContainer");
+    container.innerHTML = "";
 
-const total=document.getElementById("totalCount");
+    total.innerText = list.length;
 
-const anonymous=document.getElementById("anonymousCount");
+    let anon = 0;
 
-const search=document.getElementById("search");
+    list.forEach(item => {
 
-const logout=document.getElementById("logoutBtn");
+        if (item.deleted === true)
+            return;
 
-let feedback=[];
+        const displayName =
+            item.name && item.name.trim() !== ""
+                ? item.name
+                : "Anonymous";
 
-onAuthStateChanged(auth,async(user)=>{
+        if (!item.name || item.name.trim() === "") {
+            anon++;
+        }
 
-if(!user){
+        const status = item.status || "unread";
 
-window.location="login.html";
+        const bullet =
+            status === "read"
+                ? "🟢"
+                : "🔵";
 
-return;
+        const buttonText =
+            status === "read"
+                ? "Reviewed"
+                : "Mark Reviewed";
+
+        const disabled =
+            status === "read"
+                ? "disabled"
+                : "";
+
+        const card = document.createElement("div");
+
+        card.className = "feedback";
+
+        card.innerHTML = `
+
+            <div class="feedbackHeader">
+
+                <div>
+
+                    <h4>${displayName}</h4>
+
+                    <small>
+
+                        ${item.timestamp
+                            ? item.timestamp.toDate().toLocaleString()
+                            : "Just now"}
+
+                    </small>
+
+                </div>
+
+                <div>
+
+                    ${bullet} ${status.charAt(0).toUpperCase() + status.slice(1)}
+
+                </div>
+
+            </div>
+
+            <p>${item.feedback}</p>
+
+            <button
+                class="reviewBtn"
+                data-id="${item.id}"
+                ${disabled}
+            >
+
+                ${buttonText}
+
+            </button>
+
+        `;
+
+        container.appendChild(card);
+
+        if (status !== "read") {
+
+            card.querySelector(".reviewBtn").addEventListener("click", async () => {
+
+                await updateDoc(
+                    doc(db, "feedback", item.id),
+                    {
+                        status: "read"
+                    }
+                );
+
+                item.status = "read";
+
+                render(list);
+
+            });
+
+        }
+
+    });
+
+    anonymous.innerText = anon;
 
 }
 
-const q=query(
+search.addEventListener("input", () => {
 
-collection(db,"feedback"),
+    const term = search.value.toLowerCase();
 
-orderBy("timestamp","desc")
+    const filtered = feedback.filter(item => {
 
-);
+        if (item.deleted)
+            return false;
 
-const snapshot=await getDocs(q);
+        const name =
+            item.name
+                ? item.name.toLowerCase()
+                : "";
 
-feedback=[];
+        const fb =
+            item.feedback
+                ? item.feedback.toLowerCase()
+                : "";
 
-snapshot.forEach(doc=>{
+        return (
+            name.includes(term) ||
+            fb.includes(term)
+        );
 
-feedback.push({
+    });
 
-id:doc.id,
-
-...doc.data()
-
-});
-
-});
-
-render(feedback);
-
-});
-
-function render(list){
-
-container.innerHTML="";
-
-total.innerText=list.length;
-
-let anon=0;
-
-list.forEach(item=>{
-
-if(item.name==="Anonymous")
-
-anon++;
-
-const card=document.createElement("div");
-
-card.className="feedback";
-
-card.innerHTML=`
-
-<h4>${item.name}</h4>
-
-<small>
-
-${item.timestamp?.toDate().toLocaleString()}
-
-</small>
-
-<p>
-
-${item.feedback}
-
-</p>
-
-`;
-
-container.appendChild(card);
+    render(filtered);
 
 });
 
-anonymous.innerText=anon;
+logout.addEventListener("click", async () => {
 
-}
+    await signOut(auth);
 
-search.addEventListener("input",()=>{
-
-const term=search.value.toLowerCase();
-
-render(
-
-feedback.filter(f=>
-
-f.feedback.toLowerCase().includes(term)||
-
-f.name.toLowerCase().includes(term)
-
-)
-
-);
-
-});
-
-logout.addEventListener("click",()=>{
-
-signOut(auth);
+    window.location = "../index.html";
 
 });
