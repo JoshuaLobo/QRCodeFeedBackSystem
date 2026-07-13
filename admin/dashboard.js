@@ -15,6 +15,7 @@ import { deleteFeedback } from "./delete.js";
 const logoutBtn = document.getElementById("logoutBtn");
 const searchBox = document.getElementById("search");
 const feedbackContainer = document.getElementById("feedbackContainer");
+const exportBtn=document.getElementById("exportBtn");
 
 let feedback = [];
 
@@ -67,6 +68,25 @@ searchBox.addEventListener("input", () => {
 
 });
 
+exportBtn.addEventListener(
+
+"click",
+
+()=>{
+
+    exportCSV(
+
+        searchFeedback(
+
+            feedback,
+
+            searchBox.value
+
+        )
+
+    );
+
+});
 // ----------------------
 // EVENT DELEGATION
 // ----------------------
