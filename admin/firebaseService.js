@@ -1,19 +1,112 @@
-import {db} from "../firebase.js";
+// ===============================
+// Firestore Service
+// ===============================
 
-import {CONFIG} from "./config.js";
+import { db } from "../firebase.js";
 
-export async function loadFeedback(){
+import { CONFIG } from "./config.js";
+
+import {
+
+    collection,
+    getDocs,
+    query,
+    orderBy,
+    updateDoc,
+    doc,
+    deleteDoc
+
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+
+// ===============================
+// Load All Feedback
+// ===============================
+
+export async function loadFeedback() {
+
+    const q = query(
+
+        collection(db, CONFIG.COLLECTION),
+
+        orderBy("timestamp", "desc")
+
+    );
+
+    const snapshot = await getDocs(q);
+
+    let feedback = [];
+
+    snapshot.forEach(document => {
+
+        feedback.push({
+
+            id: document.id,
+
+            ...document.data()
+
+        });
+
+    });
+
+    return feedback;
 
 }
 
-export async function updateStatus(id,status){
+
+// ===============================
+// Toggle Read/Unread
+// ===============================
+
+export async function updateFeedbackStatus(id, status) {
+
+    await updateDoc(
+
+        doc(db, CONFIG.COLLECTION, id),
+
+        {
+
+            status: status
+
+        }
+
+    );
 
 }
 
-export async function deleteFeedback(id){
+
+// ===============================
+// Soft Delete
+// ===============================
+
+export async function softDeleteFeedback(id) {
+
+    await updateDoc(
+
+        doc(db, CONFIG.COLLECTION, id),
+
+        {
+
+            deleted: true
+
+        }
+
+    );
 
 }
 
-export async function getStatistics(){
+
+// ===============================
+// Permanent Delete
+// (not used yet)
+// ===============================
+
+export async function permanentDelete(id) {
+
+    await deleteDoc(
+
+        doc(db, CONFIG.COLLECTION, id)
+
+    );
 
 }
