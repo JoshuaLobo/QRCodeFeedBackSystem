@@ -69,12 +69,14 @@ export function exportCSV(feedback){
     );
 
     const url=URL.createObjectURL(blob);
+    const today = new Date().toISOString().split("T")[0];
+
 
     const a=document.createElement("a");
-
+    
     a.href=url;
-
-    a.download="feedback.csv";
+    a.download = `Feedback_${today}.csv`;
+    //a.download="feedback.csv";
 
     document.body.appendChild(a);
 
