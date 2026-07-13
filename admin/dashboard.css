@@ -1,3 +1,35 @@
+.adminActions{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+    width:200px;
+
+}
+
+#logoutBtn,
+#exportBtn{
+
+    width:100%;
+
+}
+
+#exportBtn{
+
+    background:#3155ad;
+
+    color:white;
+
+}
+
+#exportBtn:hover{
+
+    opacity:0.9;
+
+}
 #exportBtn{
 
     padding:10px 20px;
