@@ -1,7 +1,3 @@
-// =====================================
-// Dashboard Controller
-// =====================================
-
 import { auth } from "../firebase.js";
 
 import {
@@ -13,47 +9,35 @@ import { loadFeedback } from "./firebaseService.js";
 import { renderFeedback } from "./ui.js";
 import { calculateStatistics, updateStatistics } from "./statistics.js";
 import { searchFeedback } from "./search.js";
+import { toggleStatus } from "./status.js";
+import { deleteFeedback } from "./delete.js";
 
 const logoutBtn = document.getElementById("logoutBtn");
 const searchBox = document.getElementById("search");
+const feedbackContainer = document.getElementById("feedbackContainer");
 
 let feedback = [];
-
-// ---------------------------
-// Authentication
-// ---------------------------
 
 onAuthStateChanged(auth, async (user) => {
 
     if (!user) {
-
         window.location = "login.html";
-
         return;
-
     }
 
-    await initialiseDashboard();
+    await loadDashboard();
 
 });
 
-// ---------------------------
-// Load Dashboard
-// ---------------------------
-
-async function initialiseDashboard() {
+async function loadDashboard() {
 
     feedback = await loadFeedback();
 
-    refreshDashboard(feedback);
+    draw(feedback);
 
 }
 
-// ---------------------------
-// Refresh Dashboard
-// ---------------------------
-
-function refreshDashboard(list) {
+function draw(list) {
 
     renderFeedback(list);
 
@@ -63,27 +47,76 @@ function refreshDashboard(list) {
 
 }
 
-// ---------------------------
-// Search
-// ---------------------------
+// ----------------------
+// SEARCH
+// ----------------------
 
 searchBox.addEventListener("input", () => {
 
-    const filtered = searchFeedback(
+    draw(
 
-        feedback,
+        searchFeedback(
 
-        searchBox.value
+            feedback,
+
+            searchBox.value
+
+        )
 
     );
 
-    refreshDashboard(filtered);
+});
+
+// ----------------------
+// EVENT DELEGATION
+// ----------------------
+
+feedbackContainer.addEventListener("click", async (e) => {
+
+    const reviewButton = e.target.closest(".reviewBtn");
+    const deleteButton = e.target.closest(".deleteBtn");
+
+    if (!reviewButton && !deleteButton)
+        return;
+
+    const card = reviewButton || deleteButton;
+
+    const id = card.dataset.id;
+
+    const item = feedback.find(f => f.id === id);
+
+    if (!item)
+        return;
+
+    if (reviewButton) {
+
+        await toggleStatus(item);
+
+    }
+
+    if (deleteButton) {
+
+        await deleteFeedback(item);
+
+    }
+
+    draw(
+
+        searchFeedback(
+
+            feedback,
+
+            searchBox.value
+
+        )
+
+    );
 
 });
 
-// ---------------------------
-// Logout
-// ---------------------------
+// ----------------------
+// LOGOUT
+// ----------------------
 
 logoutBtn.addEventListener("click", async () => {
 
