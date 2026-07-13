@@ -51,21 +51,27 @@ form.addEventListener("submit", async (event) => {
 
         await addDoc(collection(db, "feedback"), {
 
-            name: name === "" ? "Anonymous" : name,
+    // User Details
+    name: name.trim(),
 
-            feedback: feedback,
+    feedback: feedback.trim(),
 
-            timestamp: serverTimestamp(),
+    // Metadata
+    timestamp: serverTimestamp(),
 
-            browserLanguage: navigator.language,
+    status: "unread",
 
-            platform: navigator.platform,
+    deleted: false,
 
-            userAgent: navigator.userAgent,
+    submittedFrom: "Skinners Horse Feedback Website",
 
-            submittedFrom: "Skinners Horse Feedback Website v1.0"
+    browserLanguage: navigator.language,
 
-        });
+    platform: navigator.platform,
+
+    userAgent: navigator.userAgent
+
+});
 
         form.reset();
 
