@@ -110,33 +110,11 @@ feedbackContainer.addEventListener("click", async (e) => {
     if (!item)
         return;
 
-    if (reviewButton) {
-
-       console.log("Review button clicked");
-        console.log(item);
-
-        try {
-
-            await toggleStatus(item);
-
-            console.log("Status updated successfully");
-    
-        } catch (err) {
-
-            console.error(err);
-         }
-
-    }
-
-   if (deleteButton) {
-
-    console.log("Delete button clicked");
+   if (reviewButton) {
 
     try {
 
-        await deleteFeedback(item);
-
-        console.log("Delete successful");
+        await toggleStatus(item);
 
     } catch (err) {
 
@@ -145,19 +123,36 @@ feedbackContainer.addEventListener("click", async (e) => {
     }
 
 }
-    draw(
 
-        searchFeedback(
+if (deleteButton) {
 
-            feedback,
+    try {
 
-            searchBox.value
+        await deleteFeedback(item);
 
-        )
+    } catch (err) {
 
-    );
+        console.error(err);
 
-});
+    }
+
+}
+
+// Reload feedback from Firestore
+feedback = await loadFeedback();
+
+// Redraw dashboard
+draw(
+
+    searchFeedback(
+
+        feedback,
+
+        searchBox.value
+
+    )
+
+);
 
 // ----------------------
 // LOGOUT
