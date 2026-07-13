@@ -173,3 +173,22 @@ button:hover{
 background:#4168c6;
 
 }
+
+.feedbackHeader{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:15px;
+
+}
+
+.reviewBtn{
+
+    margin-top:15px;
+
+}
+
