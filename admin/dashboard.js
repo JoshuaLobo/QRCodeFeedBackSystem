@@ -15,10 +15,14 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 const container = document.getElementById("feedbackContainer");
-const total = document.getElementById("totalCount");
-const anonymous = document.getElementById("anonymousCount");
+
+const totalCount = document.getElementById("totalCount");
+const anonymousCount = document.getElementById("anonymousCount");
+const readCount = document.getElementById("readCount");
+const unreadCount = document.getElementById("unreadCount");
+
 const search = document.getElementById("search");
-const logout = document.getElementById("logoutBtn");
+const logoutBtn = document.getElementById("logoutBtn");
 
 let feedback = [];
 
@@ -61,14 +65,17 @@ function render(list) {
 
     container.innerHTML = "";
 
-    total.innerText = list.length;
-
-    let anon = 0;
+    let total = 0;
+    let anonymous = 0;
+    let read = 0;
+    let unread = 0;
 
     list.forEach(item => {
 
         if (item.deleted === true)
             return;
+
+        total++;
 
         const displayName =
             item.name && item.name.trim() !== ""
@@ -76,10 +83,15 @@ function render(list) {
                 : "Anonymous";
 
         if (!item.name || item.name.trim() === "") {
-            anon++;
+            anonymous++;
         }
 
         const status = item.status || "unread";
+
+        if (status === "read")
+            read++;
+        else
+            unread++;
 
         const bullet =
             status === "read"
@@ -88,13 +100,8 @@ function render(list) {
 
         const buttonText =
             status === "read"
-                ? "Reviewed"
+                ? "Mark Unread"
                 : "Mark Reviewed";
-
-        const disabled =
-            status === "read"
-                ? "disabled"
-                : "";
 
         const card = document.createElement("div");
 
@@ -110,15 +117,17 @@ function render(list) {
 
                     <small>
 
-                        ${item.timestamp
-                            ? item.timestamp.toDate().toLocaleString()
-                            : "Just now"}
+                        ${
+                            item.timestamp
+                                ? item.timestamp.toDate().toLocaleString()
+                                : "Just now"
+                        }
 
                     </small>
 
                 </div>
 
-                <div>
+                <div style="font-weight:bold;">
 
                     ${bullet} ${status.charAt(0).toUpperCase() + status.slice(1)}
 
@@ -128,11 +137,7 @@ function render(list) {
 
             <p>${item.feedback}</p>
 
-            <button
-                class="reviewBtn"
-                data-id="${item.id}"
-                ${disabled}
-            >
+            <button class="reviewBtn">
 
                 ${buttonText}
 
@@ -142,28 +147,32 @@ function render(list) {
 
         container.appendChild(card);
 
-        if (status !== "read") {
+        card.querySelector(".reviewBtn").addEventListener("click", async () => {
 
-            card.querySelector(".reviewBtn").addEventListener("click", async () => {
+            const newStatus =
+                item.status === "read"
+                    ? "unread"
+                    : "read";
 
-                await updateDoc(
-                    doc(db, "feedback", item.id),
-                    {
-                        status: "read"
-                    }
-                );
+            await updateDoc(
+                doc(db, "feedback", item.id),
+                {
+                    status: newStatus
+                }
+            );
 
-                item.status = "read";
+            item.status = newStatus;
 
-                render(list);
+            render(feedback);
 
-            });
-
-        }
+        });
 
     });
 
-    anonymous.innerText = anon;
+    totalCount.innerText = total;
+    anonymousCount.innerText = anonymous;
+    readCount.innerText = read;
+    unreadCount.innerText = unread;
 
 }
 
@@ -176,15 +185,13 @@ search.addEventListener("input", () => {
         if (item.deleted)
             return false;
 
-        const name =
-            item.name
-                ? item.name.toLowerCase()
-                : "";
+        const name = item.name
+            ? item.name.toLowerCase()
+            : "";
 
-        const fb =
-            item.feedback
-                ? item.feedback.toLowerCase()
-                : "";
+        const fb = item.feedback
+            ? item.feedback.toLowerCase()
+            : "";
 
         return (
             name.includes(term) ||
@@ -197,7 +204,7 @@ search.addEventListener("input", () => {
 
 });
 
-logout.addEventListener("click", async () => {
+logoutBtn.addEventListener("click", async () => {
 
     await signOut(auth);
 
