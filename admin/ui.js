@@ -3,7 +3,15 @@
 // =====================================
 
 import { CONFIG } from "./config.js";
+// =====================================
+// Refresh UI
+// =====================================
 
+export function refreshDashboard(feedback, renderFunction) {
+
+    renderFunction(feedback);
+
+}
 export function renderFeedback(feedback) {
 
     const container = document.getElementById("feedbackContainer");
