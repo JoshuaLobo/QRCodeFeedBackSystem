@@ -1,0 +1,133 @@
+body{
+
+    background:#050505;
+
+    color:#F5F5F5;
+
+    font-family:'Inter',sans-serif;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:0;
+
+}
+
+.login-card{
+
+    width:420px;
+
+    background:#141414;
+
+    border:1px solid #333;
+
+    border-radius:18px;
+
+    padding:40px;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+
+    text-align:center;
+
+}
+
+.logo{
+
+    width:150px;
+
+    display:block;
+
+    margin:0 auto 20px;
+
+}
+
+h1{
+
+    font-family:'Cinzel',serif;
+
+    color:#dcb45b;
+
+    margin-bottom:5px;
+
+}
+
+h2{
+
+    color:#999;
+
+    font-weight:400;
+
+    margin-bottom:35px;
+
+}
+
+label{
+
+    display:block;
+
+    text-align:left;
+
+    margin-bottom:8px;
+
+    margin-top:15px;
+
+}
+
+input{
+
+    width:100%;
+
+    padding:14px;
+
+    background:#222;
+
+    color:white;
+
+    border:1px solid #444;
+
+    border-radius:10px;
+
+    box-sizing:border-box;
+
+}
+
+button{
+
+    width:100%;
+
+    margin-top:25px;
+
+    padding:15px;
+
+    background:#3155ad;
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+}
+
+button:hover{
+
+    background:#4168c6;
+
+}
+
+#errorMessage{
+
+    color:#ff5c5c;
+
+    margin-top:20px;
+
+}
