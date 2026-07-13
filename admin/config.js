@@ -24,5 +24,12 @@ export const CONFIG = {
         SOFT_DELETE: true
 
     }
+        
+    LABELS: {
+    ANONYMOUS: "Anonymous",
+    MARK_REVIEWED: "Mark Reviewed",
+    MARK_UNREAD: "Mark Unread",
+    DELETE_CONFIRM: "Are you sure you want to delete this feedback?"
+}
 
 };
