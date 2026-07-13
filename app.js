@@ -77,11 +77,11 @@ form.addEventListener("submit", async (event) => {
 
     catch (error) {
 
-        console.error(error);
+    console.error("Firebase Error:", error);
 
-        alert("Unable to submit feedback.\n\nPlease try again.");
+    alert(error.message);
 
-    }
+}
 
     submitBtn.disabled = false;
 
