@@ -23,7 +23,7 @@ export const CONFIG = {
 
         SOFT_DELETE: true
 
-    }
+    },
         
     LABELS: {
     ANONYMOUS: "Anonymous",
